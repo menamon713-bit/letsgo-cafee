@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lets Go Cafe | سوهاج</title>
+
+<!-- SEO -->
+<meta name="description" content="Lets Go Cafe - مطعم وكافيه في سوهاج. برجر، بيتزا، سكانر، كريب، مشروبات. اطلب دلوقتي!">
+<meta name="keywords" content="Lets Go Cafe, سوهاج, مطعم, كافيه, برجر, بيتزا, سكانر, دليفري">
+<meta property="og:title" content="Lets Go Cafe | سوهاج">
+<meta property="og:description" content="مطعم وكافيه - اطلب دلوقتي">
+<meta property="og:type" content="restaurant">
+<meta name="theme-color" content="#1a1208">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root, body.dark {
+    --bg: #1a1208;
+    --card: rgba(45,32,15,0.6);
+    --gold: #d4a574;
+    --gold-2: #b8860b;
+    --orange: #e67e22;
+    --orange-2: #d35400;
+    --text: #fff8f0;
+    --muted: #b8a888;
+    --border: rgba(212,165,116,0.25);
+    --glow: rgba(230,126,34,0.4);
+  }
+
+  body.light {
+    --bg: #fff8f0;
+    --card: rgba(255,255,255,0.85);
+    --gold: #b8860b;
+    --gold-2: #8b6508;
+    --orange: #d35400;
+    --orange-2: #a04000;
+    --text: #2d1b0e;
+    --muted: #8b7355;
+    --border: rgba(184,134,11,0.25);
+    --glow: rgba(211,84,0,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+    min-height: 100vh;
+  }
+
+  .bg-animation {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -2; overflow: hidden;
+    pointer-events: none;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.4;
+    animation: floatBlob 22s infinite ease-in-out;
+  }
+  .blob-1 { width: 420px; height: 420px; background: radial-gradient(circle, #e67e22, transparent); top: -10%; right: -10%; }
+  .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, #b8860b, transparent); bottom: -20%; left: -15%; animation-delay: -8s; }
+  .blob-3 { width: 350px; height: 350px; background: radial-gradient(circle, #d35400, transparent); top: 45%; left: 40%; animation-delay: -15s; opacity: 0.25; }
+
+  @keyframes floatBlob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(70px, -60px) scale(1.1); }
+    66% { transform: translate(-60px, 70px) scale(0.9); }
+  }
+
+  nav {
+    position: fixed; top: 0; width: 100%;
+    padding: 16px 6%;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(26,18,8,0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    transition: 0.4s;
+  }
+  body.light nav { background: rgba(255,248,240,0.85); }
+
+  .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-links { display: flex; gap: 24px; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-weight: 600; font-size: 0.9rem;
+    transition: 0.3s; padding: 5px 0;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute;
+    bottom: 0; right: 0; width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    transition: 0.3s; border-radius: 2px;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .theme-btn, .menu-btn {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text);
+    width: 42px; height: 42px;
+    border-radius: 12px; cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.3s; backdrop-filter: blur(10px);
+  }
+  .theme-btn:hover, .menu-btn:hover {
+    border-color: var(--orange);
+    box-shadow: 0 0 20px var(--glow);
+  }
+  .menu-btn { display: none; }
+
+  .mobile-menu {
+    position: fixed; top: 0; right: -100%;
+    width: 75%; max-width: 320px;
+    height: 100vh;
+    background: rgba(26,18,8,0.98);
+    backdrop-filter: blur(25px);
+    border-left: 1px solid var(--border);
+    z-index: 1000;
+    padding: 90px 25px 30px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  body.light .mobile-menu { background: rgba(255,248,240,0.98); }
+  .mobile-menu.open { right: 0; }
+  .mobile-menu a {
+    color: var(--text); text-decoration: none;
+    font-weight: 700; font-size: 1.1rem;
+    padding: 15px 18px; border-radius: 12px;
+    transition: 0.3s; display: flex; align-items: center; gap: 12px;
+  }
+  .mobile-menu a:hover {
+    background: rgba(230,126,34,0.12);
+    color: var(--orange);
+    transform: translateX(-5px);
+  }
+  .menu-close {
+    position: absolute; top: 20px; left: 20px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text);
+    width: 40px; height: 40px; border-radius: 10px;
+    cursor: pointer; font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .menu-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 999; opacity: 0; visibility: hidden;
+    transition: 0.4s;
+  }
+  .menu-overlay.show { opacity: 1; visibility: visible; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center; padding: 120px 6% 60px;
+    position: relative;
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 20px;
+    border: 1px solid var(--border); border-radius: 50px;
+    color: var(--orange); font-size: 0.85rem; font-weight: 600;
+    margin-bottom: 25px; background: var(--card);
+    backdrop-filter: blur(10px);
+    animation: fadeInDown 1s ease, pulseGlow 3s infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 var(--glow); }
+    50% { box-shadow: 0 0 20px 6px var(--glow); }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 900; margin-bottom: 20px;
+    line-height: 1.2;
+    animation: fadeInUp 1s ease 0.2s both;
+  }
+  .hero h1 .gradient-text {
+    background: linear-gradient(90deg, var(--orange), var(--gold), var(--orange));
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s linear infinite;
+  }
+  @keyframes gradientShift {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-desc {
+    color: var(--muted); max-width: 620px;
+    margin: 0 auto 40px; font-size: 1.05rem;
+    animation: fadeInUp 1s ease 0.5s both;
+  }
+
+  .btn-group {
+    display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;
+    animation: fadeInUp 1s ease 0.6s both;
+  }
+  .btn {
+    padding: 14px 32px; border-radius: 12px;
+    text-decoration: none; font-weight: 700; font-size: 1rem;
+    transition: 0.4s;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    color: white;
+    box-shadow: 0 4px 20px rgba(230,126,34,0.4);
+  }
+  .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(230,126,34,0.7);
+  }
+  .btn-outline {
+    border: 1.5px solid var(--border);
+    color: var(--text); background: var(--card);
+    backdrop-filter: blur(10px);
+  }
+  .btn-outline:hover {
+    border-color: var(--orange); color: var(--orange);
+    transform: translateY(-4px);
+  }
+
+  section { padding: 90px 6%; position: relative; }
+
+  .section-title {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900; margin-bottom: 15px;
+    display: inline-block; width: 100%;
+  }
+  .section-title::after {
+    content: ''; display: block;
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    margin: 15px auto 0; border-radius: 4px;
+  }
+  .section-sub {
+    text-align: center; color: var(--muted);
+    margin-bottom: 50px; font-size: 1rem;
+  }
+
+  .menu-controls {
+    max-width: 700px; margin: 0 auto 40px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .search-box {
+    position: relative;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px;
+    backdrop-filter: blur(10px);
+  }
+  .search-box input {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    background: transparent; border: none; outline: none;
+    color: var(--text); font-family: 'Cairo', sans-serif;
+    font-size: 1rem; font-weight: 600;
+  }
+  .search-box input::placeholder { color: var(--muted); }
+  .search-box::before {
+    content: '🔍';
+    position: absolute;
+    left: 18px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+  }
+
+  .filter-tabs {
+    display: flex; flex-wrap: wrap;
+    gap: 8px; justify-content: center;
+  }
+  .filter-tab {
+    padding: 10px 22px;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+    transition: 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .filter-tab:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .filter-tab.active {
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 15px var(--glow);
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .menu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+  .menu-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 30px var(--glow);
+  }
+
+  .card-thumb {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    font-size: 3.5rem;
+  }
+  .card-thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, var(--card) 100%);
+  }
+  .card-thumb span { position: relative; z-index: 1; animation: float 3s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .t-burger { background: linear-gradient(135deg, #e67e22, #d35400); }
+  .t-chicken { background: linear-gradient(135deg, #c0392b, #e67e22); }
+  .t-skillet { background: linear-gradient(135deg, #8b6508, #d4a574); }
+  .t-sandwich { background: linear-gradient(135deg, #16a085, #27ae60); }
+  .t-pizza { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+  .t-pasta { background: linear-gradient(135deg, #d35400, #e67e22); }
+  .t-drink { background: linear-gradient(135deg, #2980b9, #3498db); }
+  .t-dessert { background: linear-gradient(135deg, #8e44ad, #c39bd3); }
+  .t-soup { background: linear-gradient(135deg, #b8860b, #d4a574); }
+  .t-salad { background: linear-gradient(135deg, #27ae60, #16a085); }
+
+  .card-body {
+    padding: 20px 22px 22px;
+    flex: 1;
+    display: flex; flex-direction: column;
+    position: relative; z-index: 1;
+  }
+  .card-body h3 {
+    font-size: 1.1rem; margin-bottom: 6px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .card-category {
+    font-size: 0.75rem;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .card-body p {
+    color: var(--muted); font-size: 0.88rem;
+    margin-bottom: 15px;
+    flex: 1;
+  }
+  .card-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .price {
+    font-size: 1.15rem; font-weight: 900;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .price-range {
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .card-btn {
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700; font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .card-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px var(--glow);
+  }
+
+  .no-results {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+
+  .contact-box {
+    max-width: 700px; margin: 0 auto; text-align: center;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 28px; padding: 50px 30px;
+    backdrop-filter: blur(20px);
+    position: relative; overflow: hidden;
+  }
+  .contact-box::before {
+    content: ''; position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: conic-gradient(from 0deg, transparent, var(--glow), transparent 30%);
+    animation: rotate 7s linear infinite;
+    z-index: -1; opacity: 0.4;
+  }
+  @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .contact-box > * { position: relative; z-index: 1; }
+
+  .contact-box h3 {
+    font-size: 1.7rem; margin-bottom: 15px;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+  }
+  .contact-item {
+    background: rgba(230,126,34,0.08);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 15px;
+    transition: 0.3s;
+  }
+  .contact-item:hover {
+    border-color: var(--orange);
+    transform: translateY(-4px);
+  }
+  .contact-icon { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+  .contact-label {
+    font-size: 0.78rem; color: var(--muted);
+    font-weight: 600; margin-bottom: 4px;
+  }
+  .contact-value {
+    font-size: 0.95rem; color: var(--text);
+    font-weight: 700; direction: ltr;
+  }
+  .contact-value.rtl { direction: rtl; }
+
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(90deg, #25D366, #128C7E);
+    color: white; padding: 16px 38px; border-radius: 14px;
+    text-decoration: none; font-weight: 700; font-size: 1.05rem;
+    transition: 0.4s;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    margin-top: 10px;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(37,211,102,0.6);
+  }
+
+  /* === Footer === */
+  footer {
+    text-align: center; padding: 35px 20px;
+    color: var(--muted); font-size: 0.88rem;
+    border-top: 1px solid var(--border);
+    margin-top: 50px;
+    line-height: 1.9;
+  }
+  footer a {
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+  }
+  footer a:hover {
+    color: var(--gold);
+    text-decoration: underline;
+  }
+  .footer-restaurant {
+    font-size: 0.82rem;
+    opacity: 0.7;
+  }
+
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .menu-btn { display: flex; }
+    nav { padding: 14px 5%; }
+    section { padding: 60px 5%; }
+    .hero { padding: 100px 5% 40px; }
+    .blob { filter: blur(60px); }
+    .menu-grid { grid-template-columns: 1fr; }
+    .contact-box { padding: 35px 20px; }
+  }
+</style>
+</head>
+<body class="dark">
+
+<div class="bg-animation">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" onclick="closeMenu()">✕</button>
+  <a href="#home" onclick="closeMenu()">🏠 الرئيسية</a>
+  <a href="#menu" onclick="closeMenu()">🍽️ المنيو</a>
+  <a href="#contact" onclick="closeMenu()">📞 تواصل</a>
+</div>
+
+<nav>
+  <div class="logo">☕ Lets Go</div>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#menu">المنيو</a>
+      <a href="#contact">تواصل</a>
+    </div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" aria-label="تبديل الوضع">🌙</button>
+    <button class="menu-btn" onclick="openMenu()" aria-label="القائمة">☰</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <span class="badge">✨ أهلاً بيك في Lets Go Cafe</span>
+  <h1>طعم <span class="gradient-text">مش عادي</span><br>في قلب سوهاج</h1>
+  <p class="hero-desc">
+    برجر، بيتزا، سكانر، كريب، ومشروبات. كل حاجة بتحبها في مكان واحد.
+    اطلب دلوقتي واستمتع بأحلى طعم.
+  </p>
+  <div class="btn-group">
+    <a href="#menu" class="btn btn-primary">🍽️ شوف المنيو</a>
+    <a href="#contact" class="btn btn-outline">📞 اتصل بينا</a>
+  </div>
+</section>
+
+<!-- Menu -->
+<section id="menu">
+  <h2 class="section-title fade-in">المنيو</h2>
+  <p class="section-sub fade-in">اختار اللي نفسك فيه</p>
+
+  <div class="menu-controls fade-in">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="ابحث عن صنف..." oninput="filterMenu()">
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" onclick="filterCategory('all', this)">الكل</button>
+      <button class="filter-tab" onclick="filterCategory('burger', this)">🍔 برجر</button>
+      <button class="filter-tab" onclick="filterCategory('chicken', this)">🍗 فراخ</button>
+      <button class="filter-tab" onclick="filterCategory('skillet', this)">🍳 سكانر</button>
+      <button class="filter-tab" onclick="filterCategory('sandwich', this)">🥪 سندوتشات</button>
+      <button class="filter-tab" onclick="filterCategory('pizza', this)">🍕 بيتزا</button>
+      <button class="filter-tab" onclick="filterCategory('pasta', this)">🍝 مكرونة</button>
+      <button class="filter-tab" onclick="filterCategory('soup', this)">🍜 شوربة</button>
+      <button class="filter-tab" onclick="filterCategory('salad', this)">🥗 سلطات</button>
+      <button class="filter-tab" onclick="filterCategory('drink', this)">🥤 مشروبات</button>
+      <button class="filter-tab" onclick="filterCategory('dessert', this)">🍰 حلويات</button>
+    </div>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <h2 class="section-title fade-in">تواصل معانا</h2>
+  <p class="section-sub fade-in">اطلب دلوقتي أو زورنا</p>
+
+  <div class="contact-box fade-in">
+    <h3>مستنيينك ☕</h3>
+
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div class="contact-label">العنوان</div>
+        <div class="contact-value rtl">شارع الجمهورية، بجوار مركز الرنين المغناطيسي (برج طه عبد الحليم)، سوهاج</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div class="contact-label">المواعيد</div>
+        <div class="contact-value rtl">9:00 ص — 2:00 ص</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div class="contact-label">التليفون</div>
+        <div class="contact-value">01212515000</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <div class="contact-label">دليفري</div>
+        <div class="contact-value">01000451141</div>
+      </div>
+    </div>
+
+    <a href="https://wa.me/201212515000?text=مرحباً%20Lets%20Go%20Cafe،%20عايز%20أطلب" target="_blank" rel="noopener" class="whatsapp-btn">
+      💬 اطلب على واتساب
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  صُنع بـ ❤️ بواسطة <a href="https://menamon713-bit.github.io" target="_blank" rel="noopener">Mina Developer</a>
+  <br>
+  <span class="footer-restaurant">لمطعم Lets Go Cafe © 2025</span>
+</footer>
+
+<script>
+  // === Menu Data ===
+  const menuItems = [
+    { name: "برجر كلاسيك", category: "burger", catName: "برجر", price: "حتى 140 ج", emoji: "🍔", thumb: "t-burger" },
+    { name: "تشيز برجر", category: "burger", catName: "برجر", price: "حتى 140 ج", emoji: "🍔", thumb: "t-burger" },
+
+    { name: "وجبات الفراخ", category: "chicken", catName: "فراخ", price: "160 — 212 ج", emoji: "🍗", thumb: "t-chicken" },
+    { name: "فرايد تشيكن", category: "chicken", catName: "فراخ", price: "حتى 140 ج", emoji: "🍗", thumb: "t-chicken" },
+
+    { name: "سكانر فراخ", category: "skillet", catName: "سكانر", price: "206 ج", emoji: "🍳", thumb: "t-skillet" },
+    { name: "سكانر لحم", category: "skillet", catName: "سكانر", price: "235 ج", emoji: "🍳", thumb: "t-skillet" },
+
+    { name: "سندوتشات الفراخ", category: "sandwich", catName: "سندوتشات", price: "78 — 106 ج", emoji: "🥪", thumb: "t-sandwich" },
+    { name: "سندوتشات اللحم", category: "sandwich", catName: "سندوتشات", price: "80 — 99 ج", emoji: "🥙", thumb: "t-sandwich" },
+
+    { name: "بيتزا مارجريتا", category: "pizza", catName: "بيتزا", price: "95 — 155 ج", emoji: "🍕", thumb: "t-pizza" },
+    { name: "فطائر (Pies)", category: "pizza", catName: "فطائر", price: "130 — 165 ج", emoji: "🥧", thumb: "t-pizza" },
+
+    { name: "مكرونة (Pasta)", category: "pasta", catName: "مكرونة", price: "70 — 115 ج", emoji: "🍝", thumb: "t-pasta" },
+    { name: "كريب (Crepe)", category: "pasta", catName: "كريب", price: "65 — 125 ج", emoji: "🥞", thumb: "t-pasta" },
+
+    { name: "شوربة", category: "soup", catName: "شوربة", price: "55 — 65 ج", emoji: "🍜", thumb: "t-soup" },
+    { name: "فتة", category: "soup", catName: "فتة", price: "102 ج", emoji: "🍲", thumb: "t-soup" },
+
+    { name: "مقبلات", category: "salad", catName: "مقبلات", price: "30 — 55 ج", emoji: "🥗", thumb: "t-salad" },
+    { name: "سلطات", category: "salad", catName: "سلطات", price: "30 — 80 ج", emoji: "🥗", thumb: "t-salad" },
+
+    { name: "كوكتيلات وميلك شيك", category: "drink", catName: "مشروبات", price: "40 — 70 ج", emoji: "🥤", thumb: "t-drink" },
+    { name: "عصائر طازجة وسموثي", category: "drink", catName: "مشروبات", price: "38 — 60 ج", emoji: "🍹", thumb: "t-drink" },
+    { name: "مشروبات غازية", category: "drink", catName: "مشروبات", price: "10 — 45 ج", emoji: "🥤", thumb: "t-drink" },
+
+    { name: "حلويات", category: "dessert", catName: "حلويات", price: "40 — 99 ج", emoji: "🍰", thumb: "t-dessert" },
+    { name: "وجبات الأطفال", category: "dessert", catName: "أطفال", price: "80 ج", emoji: "🧒", thumb: "t-dessert" }
+  ];
+
+  const menuGrid = document.getElementById('menuGrid');
+
+  function renderMenu(items) {
+    if (items.length === 0) {
+      menuGrid.innerHTML = '<div class="no-results">😕 مفيش نتائج.. جرب كلمة تانية</div>';
+      return;
+    }
+    menuGrid.innerHTML = items.map(item => `
+      <div class="menu-card fade-in">
+        <div class="card-thumb ${item.thumb}">
+          <span>${item.emoji}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-category">${item.catName}</div>
+          <h3>${item.name}</h3>
+          <div class="card-footer">
+            <span class="price-range">${item.price}</span>
+            <button class="card-btn" onclick="orderItem('${item.name}')">اطلب 💬</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    setTimeout(() => {
+      document.querySelectorAll('.menu-card.fade-in').forEach((el, i) => {
+        setTimeout(() => el.classList.add('show'), i * 40);
+      });
+    }, 50);
+  }
+
+  let currentCategory = 'all';
+
+  function filterCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function filterMenu() {
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const search = document.getElementById('searchInput').value.trim().toLowerCase();
+    let filtered = menuItems;
+
+    if (currentCategory !== 'all') {
+      filtered = filtered.filter(i => i.category === currentCategory);
+    }
+    if (search) {
+      filtered = filtered.filter(i =>
+        i.name.toLowerCase().includes(search) ||
+        i.catName.toLowerCase().includes(search)
+      );
+    }
+    renderMenu(filtered);
+  }
+
+  function orderItem(itemName) {
+    const msg = encodeURIComponent(`مرحباً Lets Go Cafe، عايز أطلب: ${itemName} 🍽️`);
+    window.open(`https://wa.me/201212515000?text=${msg}`, '_blank');
+  }
+
+  // === Theme Toggle ===
+  const themeBtn = document.getElementById('themeBtn');
+  const body = document.body;
+  if (localStorage.getItem('lgc-theme') === 'light') {
+    body.classList.remove('dark');
+    body.classList.add('light');
+    themeBtn.textContent = '☀️';
+  }
+  function toggleTheme() {
+    if (body.classList.contains('dark')) {
+      body.classList.remove('dark');
+      body.classList.add('light');
+      themeBtn.textContent = '☀️';
+      localStorage.setItem('lgc-theme', 'light');
+    } else {
+      body.classList.remove('light');
+      body.classList.add('dark');
+      themeBtn.textContent = '🌙';
+      localStorage.setItem('lgc-theme', 'dark');
+    }
+  }
+
+  // === Mobile Menu ===
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    menuOverlay.classList.add('show');
+    body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    menuOverlay.classList.remove('show');
+    body.style.overflow = '';
+  }
+
+  // === Fade in on scroll ===
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('show');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // === Smooth scroll ===
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // === Initial Render ===
+  renderMenu(menuItems);
+</script>
+
+</body>
+</html>
